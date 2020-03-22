@@ -38,7 +38,26 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    var space = '';
+    var dotDash = '';
+     for (var encodedLetter of expr.match(/.{1,10}/g)){
+
+        if (encodedLetter == '**********'){
+            space += ' '
+            continue
+        }
+        for(var letter of encodedLetter.match(/.{1,2}/g)){
+            if(letter == '10')
+                dotDash += ".";
+            else if(letter == '11')
+                dotDash += '-';
+            else 
+                continue;
+        }
+        space += MORSE_TABLE[dotDash];
+        dotDash = '';
+    }
+    return space;
 }
 
 module.exports = {
